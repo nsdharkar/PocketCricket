@@ -1,12 +1,10 @@
-# Cards
-
 ## Card
 
 ### Responsibility
 
 Represents one standard playing card used in PocketCricket.
 
-A Card contains only card identity information. It does not contain gameplay rules, scoring logic, placement logic, or match logic.
+A Card contains only the identity of the card. It does not contain game rules, placement logic, or scoring logic.
 
 ---
 
@@ -14,85 +12,43 @@ A Card contains only card identity information. It does not contain gameplay rul
 
 Value Object
 
-A Card has no independent identity. Two cards with the same suit and rank represent the same card definition.
+Card equality is based on its values, not object identity.
+
+Two cards with the same Suit and Rank represent the same card definition.
 
 ---
 
 ### Structure
 
-A Card consists of:
+A Card contains:
 
 - Suit
 - Rank
-- Face
-
-The game value is derived from the card definition and is not stored separately.
 
 Example:
 
-| Card | Rank | Face | Game Value |
-|---|---|---|---|
-| Ace of Hearts | Ace | None | 1 |
-| Seven of Clubs | Seven | None | 7 |
-| Jack of Spades | Jack | Jack | 0 |
-| Queen of Diamonds | Queen | Queen | 0 |
-| King of Hearts | King | King | 0 |
+| Card | Suit | Rank |
+|---|---|---|
+| Ace of Hearts | Hearts | Ace |
+| Seven of Clubs | Clubs | Seven |
+| King of Spades | Spades | King |
 
 ---
 
-### CardSuit
+### Derived Properties
 
-Represents the standard playing card suits.
+The following values are calculated from Rank:
 
-Values:
+#### Face
 
-- Clubs
-- Diamonds
-- Hearts
-- Spades
+| Rank | Face |
+|---|---|
+| Jack | Jack |
+| Queen | Queen |
+| King | King |
+| All others | None |
 
----
-
-### CardRank
-
-Represents the identity of a card.
-
-Values:
-
-- Ace
-- Two
-- Three
-- Four
-- Five
-- Six
-- Seven
-- Eight
-- Nine
-- Ten
-- Jack
-- Queen
-- King
-
-CardRank does not represent PocketCricket scoring value.
-
----
-
-### CardFace
-
-Represents special face card identity.
-
-Values:
-
-- None
-- Jack
-- Queen
-- King
-
----
-
-### Game Value Rules
-
-Game value is calculated from the card definition:
+#### Game Value
 
 | Rank | Game Value |
 |---|---|
@@ -113,12 +69,9 @@ Card does not own:
 - Draw logic
 - Matrix placement
 - Covered state
-- Trio detection
-- Pair of 11 detection
-- KQJ detection
+- Rule detection
 - Scoring
-
-These responsibilities belong to other domain objects.
+- Match state
 
 ## Cards
 
