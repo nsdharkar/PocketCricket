@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/docs/" />
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props.xml" />
+    <File Path="DirectoryPackages.props.xml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="PocketCricket.Application/PocketCricket.Application.csproj" />
+    <Project Path="PocketCricket.Domain/PocketCricket.Domain.csproj" />
+    <Project Path="PocketCricket.Infrastructure/PocketCricket.Infrastructure.csproj" />
+    <Project Path="PocketCricket.Web/PocketCricket.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="PocketCricket.Application.Tests/PocketCricket.Application.Tests.csproj" />
+    <Project Path="PocketCricket.Domain.Tests/PocketCricket.Domain.Tests.csproj" />
+    <Project Path="PocketCricket.Integration.Tests/PocketCricket.Integration.Tests.csproj" />
+  </Folder>
+</Solution>
