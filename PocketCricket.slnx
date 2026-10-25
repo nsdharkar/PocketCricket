@@ -1,5 +1,11 @@
 <Solution>
   <Folder Name="/docs/" />
+  <Folder Name="/docs/Architecture/">
+    <File Path="Architecture-Decisions.md" />
+  </Folder>
+  <Folder Name="/docs/Domain/">
+    <File Path="Domain-Model.md" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props.xml" />
