@@ -1,5 +1,8 @@
 <Solution>
-  <Folder Name="/docs/" />
+  <Folder Name="/docs/">
+    <File Path="01-Game-Mechanics.md" />
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/docs/Architecture/">
     <File Path="Architecture-Decisions.md" />
   </Folder>
@@ -8,8 +11,8 @@
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
-    <File Path="Directory.Build.props.xml" />
-    <File Path="DirectoryPackages.props.xml" />
+    <File Path="Directory.Build.props" />
+    <File Path="DirectoryPackages.props" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="PocketCricket.Application/PocketCricket.Application.csproj" />
@@ -20,6 +23,7 @@
   <Folder Name="/tests/">
     <Project Path="PocketCricket.Application.Tests/PocketCricket.Application.Tests.csproj" />
     <Project Path="PocketCricket.Domain.Tests/PocketCricket.Domain.Tests.csproj" />
+    <Project Path="PocketCricket.Infrastructure.Tests/PocketCricket.Infrastructure.Tests.csproj" Id="36f4336b-f371-419d-83fc-fca6b978d18a" />
     <Project Path="PocketCricket.Integration.Tests/PocketCricket.Integration.Tests.csproj" />
   </Folder>
 </Solution>
