@@ -1,19 +1,20 @@
 ## Deck
 
-Status: In Progress
+Status:
+In Progress
 
 Completed:
 - Architecture review
-- First failing test
 - Deck constructor
-- Standard 52 card generation
+- Standard 52-card generation
+- Card uniqueness validation
 - Count property
-- RED/GREEN/REFACTOR cycle completed
+- RED/GREEN/REFACTOR cycles
 
 Pending:
 - Shuffle
 - Draw
-- Card uniqueness validation
+- Reset
 - Integration tests
 - Performance review
 - Security review

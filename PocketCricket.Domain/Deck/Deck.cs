@@ -14,7 +14,12 @@ public sealed class Deck
     private readonly Stack<Card> _cards;
 
     /// <summary>
-    /// 
+    /// Gets the collection of cards in the deck.
+    /// </summary>
+    public IReadOnlyCollection<Card> Cards => _cards;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Deck"/> class.
     /// </summary>
     /// <param name="randomProvider"></param>
     public Deck(IRandomProvider randomProvider)

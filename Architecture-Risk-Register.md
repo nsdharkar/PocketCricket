@@ -11,17 +11,14 @@ Cards
 Title
 Deck must guarantee card uniqueness.
 Status
-Deferred
-Reason
-Card is intentionally a value object.
+Resolved
 
-Creating two identical cards is not a problem.
+Resolution:
+Deck creates cards using every Suit × Rank combination.
+Unit tests verify that every card instance is unique.
 
-The responsibility belongs to Deck.
-Trigger
-During Deck implementation.
-Planned Verification
-Deck_ShouldContain52UniqueCards()
+Verification:
+DeckTests.Constructor_ShouldCreateDeckWithUniqueCards()
 
 AR-002
 Module

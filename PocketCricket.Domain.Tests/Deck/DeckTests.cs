@@ -11,7 +11,7 @@ namespace PocketCricket.Domain.Tests.Deck;
 public sealed class DeckTests
 {
     /// <summary>
-    /// 
+    /// Test case to verify that the constructor creates a deck with 52 cards.
     /// </summary>
     [Fact]
     public void Constructor_ShouldCreateDeckWith52Cards()
@@ -24,5 +24,23 @@ public sealed class DeckTests
 
         // Assert
         deck.Count.Should().Be(52);
+    }
+
+    /// <summary>
+    /// Test case to verify that the constructor creates a deck with unique cards.
+    /// </summary>
+    [Fact]
+    public void Constructor_ShouldCreateDeckWithUniqueCards()
+    {
+        // Arrange
+        IRandomProvider randomProvider = new FakeRandomProvider();
+
+        // Act
+        var deck = new PocketCricket.Domain.Deck.Deck(randomProvider);
+
+        // Assert
+        deck.Cards
+            .Should()
+            .OnlyHaveUniqueItems();
     }
 }
