@@ -1,13 +1,24 @@
 <Solution>
-  <Folder Name="/docs/">
-    <File Path="01-Game-Mechanics.md" />
-    <File Path="README.md" />
-  </Folder>
+  <Folder Name="/docs/" />
   <Folder Name="/docs/Architecture/">
     <File Path="Architecture-Decisions.md" />
+    <File Path="Architecture-Evolution.md" />
   </Folder>
   <Folder Name="/docs/Domain/">
     <File Path="Domain-Model.md" />
+    <File Path="Glossary.md" />
+  </Folder>
+  <Folder Name="/docs/Engineering/">
+    <File Path="Coding-Standards.md" />
+    <File Path="Module-Completion-Checklist.md" />
+    <File Path="module-status.md" />
+    <File Path="Review-History.md" />
+    <File Path="Testing-Strategy.md" />
+  </Folder>
+  <Folder Name="/docs/Project-Artifacts/">
+    <File Path="01-Game-Mechanics.md" />
+    <File Path="Architecture-Risk-Register.md" />
+    <File Path="README.md" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />

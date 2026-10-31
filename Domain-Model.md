@@ -73,16 +73,3 @@ Card does not own:
 - Scoring
 - Match state
 
-## Cards
-
-## Matrix
-
-## Rules
-
-## Scoring
-
-## Segment
-
-## Match
-
-## Multiplayer

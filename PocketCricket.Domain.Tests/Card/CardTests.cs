@@ -107,4 +107,26 @@ public sealed class CardTests
         // Assert
         card.Face.Should().Be(expectedFace);
     }
+
+    /// <summary>
+    /// Verifies that the Card constructor throws an ArgumentOutOfRangeException when an invalid suit value is provided.
+    /// </summary>
+    [Fact]
+    public void Constructor_ShouldThrow_WhenSuitIsInvalid()
+    {
+        Action action = () => new Card((CardSuit)99, CardRank.Ace);
+
+        action.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    /// <summary>
+    /// Verifies that the Card constructor throws an ArgumentOutOfRangeException when an invalid rank is provided.
+    /// </summary>
+    [Fact]
+    public void Constructor_ShouldThrow_WhenRankIsInvalid()
+    {
+        Action action = () => new Card(CardSuit.Hearts, (CardRank)99);
+
+        action.Should().Throw<ArgumentOutOfRangeException>();
+    }
 }

@@ -5,4 +5,9 @@
     <ProjectReference Include="..\PocketCricket.Domain\PocketCricket.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
+
 </Project>

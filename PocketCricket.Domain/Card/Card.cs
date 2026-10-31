@@ -16,6 +16,23 @@ public sealed record Card
     /// <param name="rank">The card rank.</param>
     public Card(CardSuit suit, CardRank rank)
     {
+
+        if (!Enum.IsDefined(suit))
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(suit),
+                suit,
+                "The specified card suit is invalid.");
+        }
+
+        if (!Enum.IsDefined(rank))
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(rank),
+                rank,
+                "The specified card rank is invalid.");
+        }
+
         Suit = suit;
         Rank = rank;
     }
