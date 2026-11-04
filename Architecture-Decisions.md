@@ -92,3 +92,11 @@ Accepted
 
 ADR-009: Domain service abstractions (e.g., IRandomProvider) live in the Domain because they are required for domain behavior.
 ADR-010: Repository interfaces live in the Application layer because persistence is an application concern. Infrastructure implements those interfaces.
+
+ADR-011
+Title: Domain Exception Hierarchy
+
+Status: Accepted
+
+Decision:
+All domain-specific business exceptions derive from PocketCricketException.

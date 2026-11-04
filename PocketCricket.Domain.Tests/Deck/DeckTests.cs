@@ -1,9 +1,11 @@
 using FluentAssertions;
-using PocketCricket.Domain.Deck;
+using PocketCricket.Domain.Cards;
+using PocketCricket.Domain.Decks;
 using PocketCricket.Domain.Interfaces;
 using PocketCricket.Domain.Tests.Random;
+using PocketCricket.Domain.Exceptions;
 
-namespace PocketCricket.Domain.Tests.Deck;
+namespace PocketCricket.Domain.Tests;
 
 /// <summary>
 /// Tests for the Deck class.
@@ -20,7 +22,7 @@ public sealed class DeckTests
         IRandomProvider randomProvider = new FakeRandomProvider();
 
         // Act
-        var deck = new PocketCricket.Domain.Deck.Deck(randomProvider);
+        var deck = new Deck(randomProvider);
 
         // Assert
         deck.Count.Should().Be(52);
@@ -36,11 +38,86 @@ public sealed class DeckTests
         IRandomProvider randomProvider = new FakeRandomProvider();
 
         // Act
-        var deck = new PocketCricket.Domain.Deck.Deck(randomProvider);
+        var deck = new Deck(randomProvider);
 
         // Assert
         deck.Cards
             .Should()
             .OnlyHaveUniqueItems();
+    }
+
+    /// <summary>
+    /// Test case to verify that the Draw method returns a card.
+    /// </summary>
+    [Fact]
+    public void Draw_ShouldReturnCard()
+    {
+        // Arrange
+        IRandomProvider randomProvider = new FakeRandomProvider();
+        var deck = new Deck(randomProvider);
+
+        // Act
+        Card card = deck.Draw();
+
+        // Assert
+        card.Should().NotBeNull();
+    }
+
+    /// <summary>
+    /// Test case to verify that the Draw method reduces the count by one.
+    /// </summary>
+    [Fact]
+    public void Draw_ShouldReduceCountByOne()
+    {
+        // Arrange
+        IRandomProvider randomProvider = new FakeRandomProvider();
+        var deck = new Deck(randomProvider);
+
+        // Act
+        deck.Draw();
+
+        // Assert
+        deck.Count.Should().Be(51);
+    }
+
+    /// <summary>
+    /// Test case to verify that the Draw method returns different cards on consecutive draws.
+    /// </summary>
+    [Fact]
+    public void Draw_ShouldReturnDifferentCardsOnConsecutiveDraws()
+    {
+        // Arrange
+        IRandomProvider randomProvider = new FakeRandomProvider();
+        var deck = new Deck(randomProvider);
+
+        // Act
+        Card firstCard = deck.Draw();
+        Card secondCard = deck.Draw();
+
+        // Assert
+        firstCard.Should().NotBe(secondCard);
+    }
+
+    /// <summary>
+    /// Test case to verify that the Draw method throws a DeckEmptyException when the deck is empty.
+    /// </summary>
+    [Fact]
+    public void Draw_WhenDeckIsEmpty_ShouldThrowDeckEmptyException()
+    {
+        // Arrange
+        IRandomProvider randomProvider = new FakeRandomProvider();
+        var deck = new Deck(randomProvider);
+
+        while (deck.Count > 0)
+        {
+            deck.Draw();
+        }
+
+        // Act
+        Action action = () => deck.Draw();
+
+        // Assert
+        action.Should()
+            .Throw<DeckEmptyException>();
     }
 }

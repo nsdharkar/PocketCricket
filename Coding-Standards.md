@@ -49,3 +49,34 @@ No production code without tests.
 
 Constructor dependencies must be validated using ArgumentNullException.ThrowIfNull() unless there is a specific reason to perform custom validation.
 
+1. Requirement Review
+
+2. Architecture Review
+   • SOLID
+   • Dependency direction
+   • Responsibility
+
+3. Security Review
+
+4. Performance Review
+
+5. Concurrency Review
+
+6. Update ADR (if needed)
+
+7. RED
+   • Smallest failing test
+
+8. GREEN
+   • Smallest honest implementation
+
+9. REFACTOR
+   • Improve without changing behavior
+
+10. Documentation
+    • Architecture Evolution
+    • Risk Register
+    • Module Status (if applicable)
+
+11. Git Commit
+

@@ -1,10 +1,11 @@
 using PocketCricket.Domain.Cards;
+using PocketCricket.Domain.Exceptions;
 using PocketCricket.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PocketCricket.Domain.Deck;
+namespace PocketCricket.Domain.Decks;
 
 /// <summary>
 /// Represents a deck of cards.
@@ -47,5 +48,20 @@ public sealed class Deck
         }
 
         return cards;
+    }
+
+    /// <summary>
+    /// Draws a card from the deck.
+    /// </summary>
+    /// <returns>The drawn </returns>
+    public Card Draw()
+    {
+
+        if (_cards.Count == 0)
+        {
+            throw new DeckEmptyException();
+        }
+
+        return _cards.Pop();
     }
 }
