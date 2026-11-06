@@ -72,3 +72,13 @@ Reason
 - Consistent with feature-based organization.
 - Prevents CS0118-style conflicts.
 
+
+## 2026-11-03
+
+### Domain Exception Hierarchy Implemented
+
+Implemented PocketCricketException as the base exception for all domain-specific business errors.
+
+Added DeckEmptyException to prevent leaking implementation-specific exceptions from Stack<Card>.
+
+Deck now validates its own invariants before drawing a card.

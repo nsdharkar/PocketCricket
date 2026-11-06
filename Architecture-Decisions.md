@@ -99,4 +99,18 @@ Title: Domain Exception Hierarchy
 Status: Accepted
 
 Decision:
-All domain-specific business exceptions derive from PocketCricketException.
+All business-rule violations within the Domain derive from PocketCricketException.
+
+Rationale:
+Prevents infrastructure exceptions from leaking outside the Domain and provides a consistent exception model for middleware and logging.
+
+ADR-013 — Deck Lifecycle
+Decision
+
+A newly created Deck is always in a playable state.
+
+Therefore:
+- Constructor creates an ordered deck.
+- Constructor immediately shuffles the deck.
+- Consumers never observe an ordered deck.
+- Mid-segment deck reconstruction is a separate domain operation and not part of Shuffle().

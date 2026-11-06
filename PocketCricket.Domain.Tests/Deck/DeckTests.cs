@@ -2,7 +2,7 @@ using FluentAssertions;
 using PocketCricket.Domain.Cards;
 using PocketCricket.Domain.Decks;
 using PocketCricket.Domain.Interfaces;
-using PocketCricket.Domain.Tests.Random;
+using PocketCricket.Domain.Tests.Random.Helpers;
 using PocketCricket.Domain.Exceptions;
 
 namespace PocketCricket.Domain.Tests;
