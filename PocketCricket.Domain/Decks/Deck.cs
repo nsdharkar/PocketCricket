@@ -43,6 +43,10 @@ public sealed class Deck
     /// </summary>
     public int Count => _cards.Count;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private static List<Card> CreateOrderedDeck()
     {
         List<Card> cards = new();

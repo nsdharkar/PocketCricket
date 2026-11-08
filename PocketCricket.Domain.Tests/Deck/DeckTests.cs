@@ -31,6 +31,21 @@ public sealed class DeckTests
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private static IRandomProvider CreateShuffleTestRandomProvider()
+    {
+        return new FakeRandomProvider(
+        17, 3, 28, 7, 41, 12, 5, 33, 19, 1,
+        24, 8, 36, 14, 2, 45, 10, 31, 6, 22,
+        13, 39, 4, 18, 26, 9, 15, 20, 11, 16,
+        7, 12, 3, 8, 5, 4, 2, 6, 1, 0,
+        3, 1, 2, 0, 1, 1, 0, 0, 0, 0,
+        0);
+    }
+
+    /// <summary>
     /// Test case to verify that the constructor creates a deck with 52 cards.
     /// </summary>
     [Fact]
@@ -127,5 +142,29 @@ public sealed class DeckTests
         // Assert
         action.Should()
             .Throw<DeckEmptyException>();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Fact]
+    public void Constructor_WhenUsingDeterministicRandomProvider_ShouldShuffleDeckDeterministically()
+    {
+        // Arrange
+        Deck deck = new(CreateShuffleTestRandomProvider()); //CreateDeck();
+
+        // Act
+        Card first = deck.Draw();
+        Card second = deck.Draw();
+        Card third = deck.Draw();
+        Card fourth = deck.Draw();
+        Card fifth = deck.Draw();
+
+        // Assert
+        first.Should().Be(new Card(CardSuit.Diamonds, CardRank.Five));
+        second.Should().Be(new Card(CardSuit.Clubs, CardRank.Four));
+        third.Should().Be(new Card(CardSuit.Hearts, CardRank.Three));
+        fourth.Should().Be(new Card(CardSuit.Clubs, CardRank.Eight));
+        fifth.Should().Be(new Card(CardSuit.Spades, CardRank.Three));
     }
 }
