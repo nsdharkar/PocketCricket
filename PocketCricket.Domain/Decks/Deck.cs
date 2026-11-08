@@ -1,5 +1,6 @@
 using PocketCricket.Domain.Cards;
 using PocketCricket.Domain.Exceptions;
+using PocketCricket.Domain.Implementations;
 using PocketCricket.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace PocketCricket.Domain.Decks;
 public sealed class Deck
 {
     private readonly Stack<Card> _cards;
+    private readonly IRandomProvider _randomProvider;
 
     /// <summary>
     /// Gets the collection of cards in the deck.
@@ -27,7 +29,13 @@ public sealed class Deck
     {
         ArgumentNullException.ThrowIfNull(randomProvider);
 
-        _cards = CreateOrderedDeck();
+        _randomProvider = randomProvider;
+
+        List<Card> cards = CreateOrderedDeck();
+
+        Shuffle(cards);
+
+        _cards = new Stack<Card>(cards);
     }
 
     /// <summary>
@@ -35,15 +43,15 @@ public sealed class Deck
     /// </summary>
     public int Count => _cards.Count;
 
-    private static Stack<Card> CreateOrderedDeck()
+    private static List<Card> CreateOrderedDeck()
     {
-        Stack<Card> cards = new();
+        List<Card> cards = new();
 
         foreach (CardSuit suit in Enum.GetValues<CardSuit>())
         {
             foreach (CardRank rank in Enum.GetValues<CardRank>())
             {
-                cards.Push(new Card(suit, rank));
+                cards.Add(new Card(suit, rank));
             }
         }
 
@@ -63,5 +71,19 @@ public sealed class Deck
         }
 
         return _cards.Pop();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cards"></param>
+    private void Shuffle(List<Card> cards)
+    {
+        for (int i = cards.Count - 1; i > 0; i--)
+        {
+            int j = _randomProvider.Next(i + 1);
+
+            (cards[i], cards[j]) = (cards[j], cards[i]);
+        }
     }
 }

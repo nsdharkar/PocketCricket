@@ -13,16 +13,31 @@ namespace PocketCricket.Domain.Tests;
 public sealed class DeckTests
 {
     /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private static IRandomProvider CreateDeterministicRandomProvider()
+    {
+        return new FakeRandomProvider(Enumerable.Repeat(0, 51).ToArray());
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private static Deck CreateDeck()
+    {
+        return new Deck(CreateDeterministicRandomProvider());
+    }
+
+    /// <summary>
     /// Test case to verify that the constructor creates a deck with 52 cards.
     /// </summary>
     [Fact]
     public void Constructor_ShouldCreateDeckWith52Cards()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-
-        // Act
-        var deck = new Deck(randomProvider);
+        Deck deck = CreateDeck();
 
         // Assert
         deck.Count.Should().Be(52);
@@ -35,11 +50,8 @@ public sealed class DeckTests
     public void Constructor_ShouldCreateDeckWithUniqueCards()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-
-        // Act
-        var deck = new Deck(randomProvider);
-
+        Deck deck = CreateDeck();
+        
         // Assert
         deck.Cards
             .Should()
@@ -53,8 +65,7 @@ public sealed class DeckTests
     public void Draw_ShouldReturnCard()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-        var deck = new Deck(randomProvider);
+        Deck deck = CreateDeck();
 
         // Act
         Card card = deck.Draw();
@@ -70,8 +81,7 @@ public sealed class DeckTests
     public void Draw_ShouldReduceCountByOne()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-        var deck = new Deck(randomProvider);
+        Deck deck = CreateDeck();
 
         // Act
         deck.Draw();
@@ -87,8 +97,7 @@ public sealed class DeckTests
     public void Draw_ShouldReturnDifferentCardsOnConsecutiveDraws()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-        var deck = new Deck(randomProvider);
+        Deck deck = CreateDeck();
 
         // Act
         Card firstCard = deck.Draw();
@@ -105,8 +114,7 @@ public sealed class DeckTests
     public void Draw_WhenDeckIsEmpty_ShouldThrowDeckEmptyException()
     {
         // Arrange
-        IRandomProvider randomProvider = new FakeRandomProvider();
-        var deck = new Deck(randomProvider);
+        Deck deck = CreateDeck();
 
         while (deck.Count > 0)
         {
