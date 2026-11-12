@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PocketCricket.Domain.Tests.Cards;
+namespace PocketCricket.Domain.Tests.CardTests;
 
 /// <summary>
 /// Tests for the <see cref="CardFace"/> enumeration.

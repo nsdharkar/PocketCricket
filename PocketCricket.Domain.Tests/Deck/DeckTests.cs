@@ -5,7 +5,7 @@ using PocketCricket.Domain.Interfaces;
 using PocketCricket.Domain.Tests.Random.Helpers;
 using PocketCricket.Domain.Exceptions;
 
-namespace PocketCricket.Domain.Tests;
+namespace PocketCricket.Domain.Tests.DeckTests;
 
 /// <summary>
 /// Tests for the Deck class.

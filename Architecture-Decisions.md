@@ -114,3 +114,10 @@ Therefore:
 - Constructor immediately shuffles the deck.
 - Consumers never observe an ordered deck.
 - Mid-segment deck reconstruction is a separate domain operation and not part of Shuffle().
+
+Deck decisions:
+- Deck owns shuffle behavior.
+- Fisher-Yates algorithm selected.
+- Randomness injected via IRandomProvider.
+- Deck construction performs shuffle.
+- Match engine owns deck rebuild/resets.

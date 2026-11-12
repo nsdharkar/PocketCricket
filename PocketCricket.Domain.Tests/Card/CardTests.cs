@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using FluentAssertions;
 
-namespace PocketCricket.Domain.Tests.Cards;
+namespace PocketCricket.Domain.Tests.CardTests;
 
 /// <summary>
 /// Tests for the <see cref="Card"/> value object.

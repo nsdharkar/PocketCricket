@@ -4,7 +4,7 @@ using System.Text;
 using FluentAssertions;
 using PocketCricket.Domain.Cards;
 
-namespace PocketCricket.Domain.Tests.Cards
+namespace PocketCricket.Domain.Tests.CardTests
 {
     /// <summary>
     /// Contains unit tests for the CardSuit enumeration.
