@@ -21,7 +21,7 @@ public sealed class RuleEngine
 
         FindElevenPairs(matrix, rules);
         FindTrios(matrix, rules);
-        FindKqjSequences(matrix, rules);
+        FindKqj(matrix, rules);
 
 
 
@@ -114,7 +114,7 @@ public sealed class RuleEngine
         }
     }
 
-    private static void FindKqjSequences(Matrix matrix, ICollection<RuleCandidate> rules)
+    private static void FindKqj(Matrix matrix, ICollection<RuleCandidate> rules)
     {
         for (int firstIndex = 0; firstIndex < matrix.Cells.Count - 2; firstIndex++)
         {
