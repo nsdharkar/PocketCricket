@@ -1,3 +1,4 @@
+using PocketCricket.Domain.Decks;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,11 +14,14 @@ public sealed class Match
     /// Initializes a new instance of the <see cref="Match"/> class.
     /// </summary>
     /// <param name="settings">The match settings.</param>
-    public Match(MatchSettings settings)
+    /// <param name="deck">The deck used throughout the match.</param>
+    public Match(MatchSettings settings, Deck deck)
     {
         ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(deck);
 
         Settings = settings;
+        Deck = deck;
         State = MatchState.WaitingForToss;
     }
 
@@ -25,6 +29,11 @@ public sealed class Match
     /// Gets the immutable settings for this match.
     /// </summary>
     public MatchSettings Settings { get; }
+
+    /// <summary>
+    /// The current innings object in the game state.
+    /// </summary>
+    public Innings? CurrentInnings { get; private set; }
 
     /// <summary>
     /// Gets the current state of the match.
@@ -40,6 +49,11 @@ public sealed class Match
     /// Gets the decision of the toss, if it has been made.
     /// </summary>
     public TossDecision? Decision { get; private set; }
+
+    /// <summary>
+    /// Gets the deck used throughout the match.
+    /// </summary>
+    public Deck Deck { get; }
 
     /// <summary>
     /// Applies the result of the toss to the match.
@@ -65,10 +79,11 @@ public sealed class Match
     /// </summary>
     /// <param name="player"></param>
     /// <param name="decision"></param>
-    public void ApplyTossDecision(
-    PlayerSide player,
-    TossDecision decision)
+    public void ApplyTossDecision(PlayerSide player, TossDecision decision)
     {
+        PlayerSide battingSide;
+        PlayerSide bowlingSide;
+
         if (TossResult is null)
         {
             throw new InvalidOperationException(
@@ -88,6 +103,32 @@ public sealed class Match
         }
 
         Decision = decision;
+
+        if (decision == TossDecision.Bat)
+        {
+            battingSide = player;
+
+            bowlingSide = GetOpponent(player);
+        }
+        else
+        {
+            battingSide = GetOpponent(player);
+            
+            bowlingSide = player;
+        }
+
+
+        CurrentInnings = new Innings(battingSide, bowlingSide);
+
         State = MatchState.InProgress;
     }
+
+    private static PlayerSide GetOpponent(PlayerSide player)
+    {
+        return player == PlayerSide.PlayerOne
+            ? PlayerSide.PlayerTwo
+            : PlayerSide.PlayerOne;
+    }
+
+
 }

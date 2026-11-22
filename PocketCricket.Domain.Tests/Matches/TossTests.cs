@@ -18,11 +18,11 @@ public sealed class TossTests
     public void Resolve_WhenPlayerOnePlacesMoreCards_ShouldDeclarePlayerOneWinner()
     {
         // Arrange
-        SegmentResult playerOneResult =
-            new(SegmentType.Toss, 45);
+        TurnResult playerOneResult =
+            new(45);
 
-        SegmentResult playerTwoResult =
-            new(SegmentType.Toss, 32);
+        TurnResult playerTwoResult =
+            new(32);
 
         Toss toss = new();
 
@@ -46,11 +46,11 @@ public sealed class TossTests
     public void Resolve_WhenPlayerTwoPlacesMoreCards_ShouldDeclarePlayerTwoWinner()
     {
         // Arrange
-        SegmentResult playerOneResult =
-            new(SegmentType.Toss, 25);
+        TurnResult playerOneResult =
+            new(25);
 
-        SegmentResult playerTwoResult =
-            new(SegmentType.Toss, 41);
+        TurnResult playerTwoResult =
+            new(41);
 
         Toss toss = new();
 
@@ -74,11 +74,11 @@ public sealed class TossTests
     public void Resolve_WhenBothPlayersPlaceSameNumberOfCards_ShouldRequireReplay()
     {
         // Arrange
-        SegmentResult playerOneResult =
-            new(SegmentType.Toss, 35);
+        TurnResult playerOneResult =
+            new(35);
 
-        SegmentResult playerTwoResult =
-            new(SegmentType.Toss, 35);
+        TurnResult playerTwoResult =
+            new(35);
 
         Toss toss = new();
 

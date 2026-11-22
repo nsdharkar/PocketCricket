@@ -12,34 +12,34 @@ namespace PocketCricket.Domain.Tests.Matches;
 public sealed class SegmentResultTests
 {
     /// <summary>
-    /// Tests the behavior of the <see cref="SegmentResult"/> constructor
+    /// Tests the behavior of the <see cref="TurnResult"/> constructor
     /// when valid values are supplied.
     /// </summary>
     [Fact]
     public void Constructor_WhenValidValuesProvided_ShouldCreateSegmentResult()
     {
         // Arrange & Act
-        SegmentResult result = new(SegmentType.Bowling, 43);
+        TurnResult playerOneResult = new(43);
+        TurnResult playerTwoResult = new(32);
 
         // Assert
-        result.SegmentType.Should().Be(SegmentType.Bowling);
-        result.CardsPlaced.Should().Be(43);
+        playerOneResult.CardsPlaced.Should().Be(43);
+        playerTwoResult.CardsPlaced.Should().Be(32);
     }
 
 
     /// <summary>
-    /// Tests the behavior of the <see cref="SegmentResult"/> constructor
+    /// Tests the behavior of the <see cref="TurnResult"/> constructor
     /// when fewer than nine cards are supplied.
     /// </summary>
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(8)]
-    public void Constructor_WhenCardsPlacedIsLessThanMinimum_ShouldThrowArgumentOutOfRangeException(
-        int cardsPlaced)
+    public void Constructor_WhenCardsPlacedIsLessThanMinimum_ShouldThrowArgumentOutOfRangeException(int cardsPlaced)
     {
         // Arrange & Act
-        Action action = () => new SegmentResult(SegmentType.Batting, cardsPlaced);
+        Action action = () => new TurnResult(cardsPlaced);
 
         // Assert
         action.Should()

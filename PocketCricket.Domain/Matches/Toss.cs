@@ -16,8 +16,8 @@ public sealed class Toss
     /// <param name="playerTwoResult">Player two's toss segment result.</param>
     /// <returns>The toss outcome.</returns>
     public TossResult Resolve(
-        SegmentResult playerOneResult,
-        SegmentResult playerTwoResult)
+        TurnResult playerOneResult,
+        TurnResult playerTwoResult)
     {
         ArgumentNullException.ThrowIfNull(playerOneResult);
         ArgumentNullException.ThrowIfNull(playerTwoResult);
