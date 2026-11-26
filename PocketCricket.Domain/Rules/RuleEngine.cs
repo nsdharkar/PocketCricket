@@ -3,13 +3,14 @@ using PocketCricket.Domain.Matrices;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PocketCricket.Domain.Interfaces;
 
 namespace PocketCricket.Domain.Rules;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class RuleEngine
+public sealed class RuleEngine : IRuleEngine
 {
     /// <summary>
     /// Finds all valid rules on the supplied matrix.

@@ -1,7 +1,9 @@
 using FluentAssertions;
+using PocketCricket.Domain.Cards;
 using PocketCricket.Domain.Decks;
 using PocketCricket.Domain.Implementations;
 using PocketCricket.Domain.Matches;
+using PocketCricket.Domain.Tests.Rules;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,11 +24,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         MatchSettings settings = new(MatchFormat.T20);
 
         // Act
-        Match match = new(settings, deck);
+        Match match = new(settings, deck, ruleEngine);
 
         // Assert
         match.Settings.Should().Be(settings);
@@ -45,10 +48,12 @@ public sealed class MatchTests
 
         // Act
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         // Assert
         match.State.Should()
@@ -63,10 +68,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
         42,
@@ -91,10 +98,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             playerOneCardsPlaced: 42,
@@ -117,10 +126,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -148,10 +159,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -177,10 +190,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         // Act
         Action action = () => match.ApplyTossDecision(
@@ -200,10 +215,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -235,10 +252,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -265,10 +284,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -298,10 +319,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -331,10 +354,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -364,10 +389,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -398,9 +425,10 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         // Act
-        Match match = new(new MatchSettings(MatchFormat.T20), deck);
+        Match match = new(new MatchSettings(MatchFormat.T20), deck, ruleEngine);
 
         // Assert
         match.Deck.Should().BeSameAs(deck);
@@ -414,8 +442,9 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
-        Match match = new(new MatchSettings(MatchFormat.T20), deck);
+        Match match = new(new MatchSettings(MatchFormat.T20), deck, ruleEngine);
 
         TossResult tossResult = new(42, 35, PlayerSide.PlayerOne, TossStatus.Completed);
 
@@ -436,10 +465,12 @@ public sealed class MatchTests
     {
         // Arrange
         Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
 
         Match match = new(
             new MatchSettings(MatchFormat.T20),
-            deck);
+            deck,
+            ruleEngine);
 
         TossResult tossResult = new(
             42,
@@ -460,5 +491,88 @@ public sealed class MatchTests
             .State
             .Should()
             .Be(TurnState.InProgress);
+    }
+
+    /// <summary>
+    /// Tests that the match draws cards from the injected deck.
+    /// </summary>
+    [Fact]
+    public void DrawCard_WhenDeckContainsCards_ShouldReturnCard()
+    {
+        // Arrange
+        Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
+
+        Match match = new(
+            new MatchSettings(MatchFormat.T20),
+            deck,
+            ruleEngine);
+
+        // Act
+        Card card = match.DrawCard();
+
+        // Assert
+        card.Should().NotBeNull();
+    }
+
+    /// <summary>
+    /// Tests that a turn can hold the currently drawn card.
+    /// </summary>
+    [Fact]
+    public void DrawCard_WhenBowlingTurnIsActive_ShouldStoreCurrentCard()
+    {
+        // Arrange
+        Deck deck = new(new RandomProvider());
+        FakeRuleEngine ruleEngine = new();
+
+        Match match = new(
+            new MatchSettings(MatchFormat.T20),
+            deck,
+            ruleEngine);
+
+        TossResult tossResult = new(
+            42,
+            35,
+            PlayerSide.PlayerOne,
+            TossStatus.Completed);
+
+        match.ApplyTossResult(tossResult);
+
+        match.ApplyTossDecision(
+            PlayerSide.PlayerOne,
+            TossDecision.Bat);
+
+        // Act
+        Card card = match.DrawCard();
+
+        match.CurrentInnings!
+            .CurrentTurn
+            .SetDrawnCard(card);
+
+        // Assert
+        match.CurrentInnings!
+            .CurrentTurn
+            .CurrentCard
+            .Should()
+            .Be(card);
+    }
+
+    /// <summary>
+    /// Tests that a new turn creates an empty matrix.
+    /// </summary>
+    [Fact]
+    public void Constructor_WhenMatchCreated_ShouldCreateInitialTurn()
+    {
+        // Arrange
+        FakeRuleEngine ruleEngine = new();
+        Turn turn = new(TurnType.Bowling, ruleEngine);
+
+        // Assert
+        turn.Matrix.Should().NotBeNull();
+
+        turn.Matrix.Cells
+            .Count(cell => !cell.IsEmpty)
+            .Should()
+            .Be(0);
     }
 }

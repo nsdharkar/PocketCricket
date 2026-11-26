@@ -1,3 +1,4 @@
+using PocketCricket.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,12 +15,15 @@ public sealed class Innings
     /// </summary>
     /// <param name="battingSide">The side of the team that is batting in this innings.</param>
     /// <param name="bowlingSide">The side of the team that is bowling in this innings.</param>
-    public Innings(PlayerSide battingSide, PlayerSide bowlingSide)
+    /// <param name="ruleEngine">The rule engine to use for evaluating rules.</param>
+    public Innings(PlayerSide battingSide, PlayerSide bowlingSide, IRuleEngine ruleEngine)
     {
+        ArgumentNullException.ThrowIfNull(ruleEngine);
+
         BattingSide = battingSide;
         BowlingSide = bowlingSide;
 
-        CurrentTurn = new Turn(TurnType.Bowling);
+        CurrentTurn = new Turn(TurnType.Bowling, ruleEngine);
     }
 
     /// <summary>

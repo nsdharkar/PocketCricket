@@ -1,4 +1,6 @@
+using PocketCricket.Domain.Cards;
 using PocketCricket.Domain.Decks;
+using PocketCricket.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,13 +17,16 @@ public sealed class Match
     /// </summary>
     /// <param name="settings">The match settings.</param>
     /// <param name="deck">The deck used throughout the match.</param>
-    public Match(MatchSettings settings, Deck deck)
+    /// <param name="ruleEngine">The rule engine used to evaluate rules.</param>
+    public Match(MatchSettings settings, Deck deck, IRuleEngine ruleEngine)
     {
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(deck);
+        ArgumentNullException.ThrowIfNull(ruleEngine);
 
         Settings = settings;
         Deck = deck;
+        _ruleEngine = ruleEngine;
         State = MatchState.WaitingForToss;
     }
 
@@ -54,6 +59,11 @@ public sealed class Match
     /// Gets the deck used throughout the match.
     /// </summary>
     public Deck Deck { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private readonly IRuleEngine _ruleEngine;
 
     /// <summary>
     /// Applies the result of the toss to the match.
@@ -118,7 +128,7 @@ public sealed class Match
         }
 
 
-        CurrentInnings = new Innings(battingSide, bowlingSide);
+        CurrentInnings = new Innings(battingSide, bowlingSide, _ruleEngine);
 
         State = MatchState.InProgress;
     }
@@ -130,5 +140,12 @@ public sealed class Match
             : PlayerSide.PlayerOne;
     }
 
-
+    /// <summary>
+    /// Draws a card from the match deck.
+    /// </summary>
+    /// <returns>The drawn card.</returns>
+    public Card DrawCard()
+    {
+        return Deck.Draw();
+    }
 }
